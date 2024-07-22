@@ -1,6 +1,5 @@
 const mongoose = require("mongoose"); // Import Mongoose for MongoDB operations
 const Joi = require("joi"); // Import Joi for data validation
-const config = require("config"); // Import config for managing configuration options
 const jwt = require("jsonwebtoken"); // Import JSON Web Token for creating and verifying tokens
 
 // Mongoose schema for MongoDB
@@ -41,14 +40,14 @@ userSchema.methods.generateAuthToken = function () {
   // Generate a JWT
   const token = jwt.sign(
     { userId: this._id, name: this.name, email: this.email, role: this.role }, // Payload
-    config.get("mail.JwtPrivateKey"), // Secret key from config
+    process.env.PRIVATE_KEY, // Secret key from environment variables
     { expiresIn: "1h" } // Token expiration time
   );
   return token; // Return the generated token
 };
 
 // Create a Mongoose model for the user schema
-const User = mongoose.model("users", userSchema);
+const User = mongoose.model("User", userSchema); // Changed model name to singular for consistency
 
 // Function to validate user data using Joi
 function validateUser(user) {
@@ -65,7 +64,7 @@ function validateUser(user) {
         "string.pattern.base":
           "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character", // Custom error message for pattern
       }),
-    role: Joi.string().valid("user", "admin", "artist"), // Role: String, must be "user" or "admin", required
+    role: Joi.string().valid("user", "admin", "artist"), // Role: String, must be "user" or "admin" or "artist"
   });
 
   return schema.validate(user); // Validate the user data against the schema
