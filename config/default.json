@@ -1,0 +1,7 @@
+{
+    "name": "my express app",
+    "mail": {
+      "password": "",
+      "JwtPrivateKey": ""
+    }
+  }
