@@ -68,16 +68,22 @@ const update = async (req, res) => {
     if (!userExist) {
       return res.status(404).json({ message: "User not found" }); // 404 Not Found if user not found
     }
+
     const { error } = validateUser(req.body);
     if (error) {
       return res.status(400).send(error.details[0].message); // 400 Bad Request if validation fails
     }
 
-    // If the password is present in the request body, hash it
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(req.body.password, salt);
-      req.body.password = hashedPassword;
+    console.log(req.body.password.length);
+    if (req.body.password.length < 50) {
+      console.log("password not hashed so ready to be hashed");
+      if (req.body.password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        req.body.password = hashedPassword;
+      }
+    } else {
+      console.log("password already hashed");
     }
 
     // Update the user with the new data and return the updated user
