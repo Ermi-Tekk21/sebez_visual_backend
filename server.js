@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRouter");
+const messageRoute = require("./routes/messageRouter");
 const { authenticateUser } = require("./controller/authenticateUser");
 const cors = require("cors");
 
@@ -19,6 +20,7 @@ app.use(cors());
 app.use("/api/user", userRoute);
 app.use("/api/auth", authenticateUser);
 app.use("/api/product", productRoute);
+app.use("/api/message", messageRoute);
 
 mongoose
   .connect(mongoURI)

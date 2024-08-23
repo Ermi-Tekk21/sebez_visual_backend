@@ -33,13 +33,18 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "admin", "artist"], // Field must be one of the specified values
     default: "user", // Default value is "user"
   },
+  profileImageUrl: {
+    type: String, // Field type: String
+    required: true, // Field is optional
+    default: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
+  }
 });
 
 // Method to generate a JWT for the user
 userSchema.methods.generateAuthToken = function () {
   // Generate a JWT
   const token = jwt.sign(
-    { userId: this._id, name: this.name, email: this.email, role: this.role }, // Payload
+    { userId: this._id, name: this.name, email: this.email, role: this.role, profileImageUrl: this.profileImageUrl }, // Payload
     process.env.PRIVATE_KEY, // Secret key from environment variables
     { expiresIn: "1h" } // Token expiration time
   );
@@ -51,24 +56,25 @@ const User = mongoose.model("User", userSchema); // Changed model name to singul
 
 // Function to validate user data using Joi
 function validateUser(user) {
-  // Define the validation schema
   const schema = Joi.object({
-    name: Joi.string().min(3).required(), // Name: String, min length 3, required
-    email: Joi.string().email().min(6).max(255).required(), // Email: Email format, min length 6, max length 255, required
-    address: Joi.string().min(3).required(), // Address: String, min length 3, required
+    name: Joi.string().min(3).required(), 
+    email: Joi.string().email().min(6).max(255).required(), 
+    address: Joi.string().min(3).required(), 
     password: Joi.string()
-      .min(8) // Password: Minimum 8 characters
-      .required() // Required
-      .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])")) // Pattern: at least one lowercase, one uppercase, one number, and one special character
+      .min(8)
+      .required()
+      .pattern(new RegExp("^(?=.*[a-z])(?=.*[A-Z])"))
       .messages({
-        "string.pattern.base":
-          "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character", // Custom error message for pattern
+        "string.pattern.base": "Password must contain at least one lowercase letter, and uppercase letter",
       }),
-    role: Joi.string().valid("user", "admin", "artist"), // Role: String, must be "user" or "admin" or "artist"
+    role: Joi.string().valid("user", "admin", "artist"), 
+    profileImageUrl: Joi.string()
+      .default('https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp') // Set default URL if empty
   });
 
-  return schema.validate(user); // Validate the user data against the schema
+  return schema.validate(user); 
 }
+
 
 // Export the User model and validateUser function
 module.exports.User = User;

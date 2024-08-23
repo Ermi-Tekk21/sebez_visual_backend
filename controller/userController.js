@@ -63,11 +63,13 @@ const fetch = async (req, res) => {
 const update = async (req, res) => {
   try {
     const id = req.params.id; // Get the user ID from the request parameters
+
     // Check if the user exists in the database
     const userExist = await User.findById(id);
     if (!userExist) {
       return res.status(404).json({ message: "User not found" }); // 404 Not Found if user not found
     }
+
 
     const { error } = validateUser(req.body);
     if (error) {
@@ -94,7 +96,7 @@ const update = async (req, res) => {
     res.status(200).json(updatedUser); // 200 OK with updated user data
   } catch (error) {
     console.error("Error updating user:", error);
-    res.status(500).json({ error: "Internal server error" }); // 500 Internal Server Error for unexpected errors
+    res.status(500).json({ error: error }); // 500 Internal Server Error for unexpected errors
   }
 };
 

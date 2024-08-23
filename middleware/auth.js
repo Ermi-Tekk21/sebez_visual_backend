@@ -14,9 +14,9 @@ module.exports = async function (req, res, next) {
 
     // Find the user by the email contained in the token
     let userExist = await User.findOne({ email: req.user.email });
-    if (!userExist) 
+    if (!userExist)
       return res.status(404).json({ message: "There is no user with this token." });
-
+    req.userExist = userExist; // Attach the userExist to req
     next(); // Proceed to the next middleware or route handler
   } catch (ex) {
     res.status(400).send("Invalid token."); // Handle invalid token errors
