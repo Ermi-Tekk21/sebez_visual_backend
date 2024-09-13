@@ -1,103 +1,60 @@
-Here's a README file for the `sebez_visual server` project:
-
-```markdown
 # Sebez Visual Server
+
+![License](https://img.shields.io/badge/license-ISC-blue.svg)
 
 ## Overview
 
-Sebez Visual Server is the backend service for the Sebez Visual Art eCommerce website. This server handles authentication, user management, product management, and other essential backend functionalities required for the eCommerce platform.
+This is the backend for the Sebez Visual Art eCommerce website. It provides the necessary APIs and services to manage user authentication, product listings, and other functionalities required for the website.
 
-## Features
+## Table of Contents
 
-- **User Authentication**: Secure user authentication using JWT (JSON Web Token).
-- **User Management**: Create, update, delete users, and manage roles.
-- **Product Management**: Handle product-related operations including addition, deletion, and retrieval of visual art products.
-- **Validation**: Input validation using Joi.
-- **Security**: Password hashing using bcrypt and secure token-based authentication.
-
-## Technologies Used
-
-- **Node.js**: JavaScript runtime for the server-side code.
-- **Express.js**: Web framework used for building the API.
-- **Mongoose**: MongoDB object modeling tool.
-- **JWT (jsonwebtoken)**: For secure authentication.
-- **bcrypt**: For password hashing.
-- **dotenv**: For environment variable management.
-- **config**: For application configuration.
-- **cors**: For Cross-Origin Resource Sharing.
-- **lodash**: Utility library for various JavaScript functions.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Scripts](#scripts)
+- [Dependencies](#dependencies)
+- [License](#license)
 
 ## Installation
 
+To install the dependencies and set up the project, follow these steps:
+
 1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   ```
-
+    ```bash
+    git clone https://github.com/Ermi-Tekk21/sebez_visual_backend.git
+    ```
 2. Navigate to the project directory:
-
-   ```bash
-   cd sebez_visual_server
-   ```
-
+    ```bash
+    cd sebez_visual_server
+    ```
 3. Install the dependencies:
-
-   ```bash
-   npm install
-   ```
-
-4. Set up environment variables:
-
-   - Create a `.env` file in the root directory.
-   - Add the following variables:
-
-     ```plaintext
-     PORT=your_port_number
-     MONGODB_URI=your_mongodb_uri
-     JWT_SECRET=your_jwt_secret
-     ```
+    ```bash
+    npm install
+    ```
 
 ## Usage
 
-To start the server, run the following command:
+To start the server in development mode, use the following command:
 
 ```bash
 npm start
-```
 
-This will run the server using `nodemon`, which will automatically restart the server on file changes.
+This will run the server with nodemon, automatically restarting it when changes are detected.
 
-## API Endpoints
+Scripts
+test: This is a placeholder for tests. Currently, it outputs an error message.
+start: Runs the server using nodemon, which watches for file changes and automatically restarts the server.
+Dependencies
+The project relies on the following npm packages:
 
-Here is a brief overview of the available API endpoints:
+bcrypt: For hashing passwords.
+config: For managing configuration files.
+cors: To enable Cross-Origin Resource Sharing.
+dotenv: For loading environment variables from a .env file.
+express: A web framework for Node.js.
+joi: For data validation.
+jsonwebtoken: To manage JSON Web Tokens (JWT) for authentication.
+lodash: A utility library for working with arrays, objects, and other data types.
+mongoose: An Object Data Modeling (ODM) library for MongoDB and Node.js.
+nodemon: A utility that monitors for any changes in your source and automatically restarts the server.
 
-- **User Routes**:
-  - `POST /api/user/create` - Create a new user
-  - `GET /api/user/getalluser` - Get all users
-  - `PUT /api/user/update/:id` - Update a user by ID
-  - `DELETE /api/user/delete/:id` - Delete a user by ID
 
-- **Product Routes**:
-  - `POST /api/product/create` - Add a new product
-  - `GET /api/product/getall` - Get all products
-  - `DELETE /api/product/delete/:id` - Delete a product by ID
-
-## License
-
-This project is licensed under the ISC License.
-
-## Author
-
-Ermias Teklemarkos
-
-## Contributing
-
-Feel free to fork this project, create a branch, and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
-
-## Acknowledgments
-
-Special thanks to the contributors and open-source community for their valuable tools and libraries.
-```
-
-This README file provides a clear overview of the project, instructions for installation and usage, a summary of the technologies used, and a brief description of the API endpoints. Let me know if you need any modifications!
