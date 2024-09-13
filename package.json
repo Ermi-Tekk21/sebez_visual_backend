@@ -1,7 +1,7 @@
 {
-  "name": "test_con",
+  "name": "sebez_visual server",
   "version": "1.0.0",
-  "description": "sebez backend",
+  "description": "back end for sebez-visual-art ecommerce website",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
