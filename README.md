@@ -33,11 +33,12 @@ To install the dependencies and set up the project, follow these steps:
 
 ## Usage
 
-To start the server in development mode, use the following command:
+    To start the server in development mode, use the following command:
 
-```bash
-npm start
+    ```bash
+    npm start
 
+    
 This will run the server with `nodemon`, automatically restarting it when changes are detected.
 
 ## Scripts
@@ -63,5 +64,6 @@ The project relies on the following npm packages:
 ## License
 
 This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for more details.
+
 
 
